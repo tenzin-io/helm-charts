@@ -1,0 +1,36 @@
+name: Helm Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version of local-path-provisioner to publish'
+        required: true
+        default: 'v0.0.26'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+
+    steps:
+      - name: Checkout rancher/local-path-provisioner repository
+        uses: actions/checkout@v4
+        with:
+          repository: rancher/local-path-provisioner
+          ref: ${{ inputs.version }}
+
+      - name: Get Helm
+        uses: azure/setup-helm@v4.2.0
+
+      - name: Login into registry ghcr.io
+        run: echo  ${{ secrets.GITHUB_TOKEN }} | helm registry login --username ${{ github.actor }} ghcr.io --password-stdin
+
+      - name: Package Helm chart
+        run: |-
+          cd deploy/chart
+          helm package --version ${{ inputs.version }} --app-version ${{ inputs.version }} local-path-provisioner-chart
+          helm push local-path-provisioner-chart-${{ inputs.version }}.tgz oci://ghcr.io/tenzin-io

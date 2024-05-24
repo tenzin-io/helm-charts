@@ -22,7 +22,6 @@ jobs:
         with:
           repository: rancher/local-path-provisioner
           ref: ${{ inputs.version }}
-          path: .
 
       - name: Get Helm
         uses: azure/setup-helm@v4.2.0
@@ -33,5 +32,5 @@ jobs:
       - name: Package Helm chart
         run: |-
           cd deploy/chart
-          helm package --version ${{ inputs.version }} --app-version ${{ inputs.version }} local-path-provisioner-chart
-          helm push local-path-provisioner-chart-${{ inputs.version }}.tgz oci://ghcr.io/tenzin-io
+          helm package --version ${{ inputs.version }} --app-version ${{ inputs.version }} local-path-provisioner
+          helm push local-path-provisioner-${{ inputs.version }}.tgz oci://ghcr.io/tenzin-io

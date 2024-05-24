@@ -22,6 +22,7 @@ jobs:
         with:
           repository: rancher/local-path-provisioner
           ref: ${{ inputs.version }}
+          path: .
 
       - name: Get Helm
         uses: azure/setup-helm@v4.2.0

@@ -8,7 +8,7 @@ on:
 
 jobs:
   release:
-    if: github.ref_type == "tag"
+    if: github.ref_type == 'tag'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -27,7 +27,7 @@ jobs:
           helm push cert-manager-config-${{ inputs.version }}.tgz oci://ghcr.io/tenzin-io
 
   devel:
-    if: github.ref_type == "branch"
+    if: github.ref_type == 'branch'
     runs-on: ubuntu-latest
     permissions:
       contents: read

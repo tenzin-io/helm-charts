@@ -29,6 +29,5 @@ jobs:
 
       - name: Package and publish Helm chart
         run: |-
-          cd deploy/chart
           helm package --version ${{ inputs.version }} --app-version ${{ inputs.version }} cert-manager-config
           helm push cert-manager-config-${{ inputs.version }}.tgz oci://ghcr.io/tenzin-io

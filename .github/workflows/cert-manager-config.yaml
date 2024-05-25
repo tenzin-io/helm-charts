@@ -24,7 +24,7 @@ jobs:
       - name: Package and publish Helm chart
         run: |-
           helm package --version ${{ github.ref_name }} --app-version ${{ github.ref_name }} cert-manager-config
-          helm push cert-manager-config-${{ inputs.version }}.tgz oci://ghcr.io/tenzin-io
+          helm push cert-manager-config-${{ github.ref_name }}.tgz oci://ghcr.io/tenzin-io
 
   devel:
     if: github.ref_type == 'branch'

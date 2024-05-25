@@ -1,4 +1,4 @@
-name: Helm Publish
+name: local-path-provisioner
 
 on:
   workflow_dispatch:

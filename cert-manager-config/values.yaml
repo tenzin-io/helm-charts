@@ -1,2 +1,6 @@
 cloudflare:
-  token: "put-cloudflare-api-token-here"
+  token: put-cloudflare-api-token-here
+
+issuer:
+  name: lets-encrypt
+  server: https://acme-v02.api.letsencrypt.org/directory

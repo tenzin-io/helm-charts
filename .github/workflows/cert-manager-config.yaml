@@ -2,32 +2,45 @@ name: cert-manager-config
 
 on:
   workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version of cert-manager-config to publish'
-        required: true
-        type: string
+  push:
+    tags:
+      - 'v*'
 
 jobs:
-  build:
+  release:
+    if: github.ref_type == "tag"
     runs-on: ubuntu-latest
-
     permissions:
       contents: read
       packages: write
       id-token: write
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Get Helm
-        uses: azure/setup-helm@v4.2.0
+      - uses: actions/checkout@v4
+      - uses: azure/setup-helm@v4.2.0
 
       - name: Login into registry ghcr.io
         run: echo  ${{ secrets.GITHUB_TOKEN }} | helm registry login --username ${{ github.actor }} ghcr.io --password-stdin
 
       - name: Package and publish Helm chart
         run: |-
-          helm package --version ${{ inputs.version }} --app-version ${{ inputs.version }} cert-manager-config
+          helm package --version ${{ github.ref_name }} --app-version ${{ github.ref_name }} cert-manager-config
           helm push cert-manager-config-${{ inputs.version }}.tgz oci://ghcr.io/tenzin-io
+
+  devel:
+    if: github.ref_type == "branch"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/setup-helm@v4.2.0
+
+      - name: Login into registry ghcr.io
+        run: echo  ${{ secrets.GITHUB_TOKEN }} | helm registry login --username ${{ github.actor }} ghcr.io --password-stdin
+
+      - name: Package and publish Helm chart
+        run: |-
+          helm package --version v0.0.0 --app-version v0.0.0 cert-manager-config
+          helm push cert-manager-config-v0.0.0.tgz oci://ghcr.io/tenzin-io

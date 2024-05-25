@@ -6,4 +6,4 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   addresses:
-    - {{ .Values.ip_pool_range }}
+    - {{ .Values.addressPool }}

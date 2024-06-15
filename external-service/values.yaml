@@ -1,0 +1,6 @@
+---
+serviceName: my-service
+originServer:
+  port: 8080
+  address: 192.0.2.254
+...

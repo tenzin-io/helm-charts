@@ -1,6 +1,0 @@
-apiVersion: v2
-name: ingress-redirect
-description: A Helm chart to create ingress to redirect to a URL outside of the Kubernetes cluster
-type: application
-version: 0.0.0
-appVersion: "0.0.0"

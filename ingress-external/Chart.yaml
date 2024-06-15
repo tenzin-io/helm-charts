@@ -1,6 +1,0 @@
-apiVersion: v2
-name: ingress-external
-description: A chart to an ingress for a service outside of the Kubernetes cluster
-type: application
-version: 0.0.0
-appVersion: "0.0.0"

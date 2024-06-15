@@ -1,6 +1,0 @@
----
-serviceName: my-service
-certificateIssuerName: lets-encrypt
-redirectURL: localhost
-virtualHostFQDN: my.service.internal
-...

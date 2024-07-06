@@ -1,6 +1,9 @@
 ---
-serviceName: my-service
+certificateIssuer: lets-encrypt
+serviceName: my-external-service
+domainName: lan
 originServer:
   port: 8080
-  address: my-service.lan
+  address: my-internal-service.lan
+bodySize: 100m
 ...

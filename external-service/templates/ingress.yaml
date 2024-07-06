@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: {{ .Values.certificateIssuer }}
+    nginx.ingress.kubernetes.io/backend-protocol: http
+    nginx.ingress.kubernetes.io/proxy-body-size: {{ .Values.bodySize }}
+  name: {{ .Values.serviceName }}
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: {{ .Values.serviceName }}.{{ .Values.domainName }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: {{ .Values.serviceName }}
+            port:
+              name: http
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - {{ .Values.serviceName }}.{{ .Values.domainName }}
+    secretName: {{ .Values.serviceName }}-tls-secret

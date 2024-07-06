@@ -5,6 +5,7 @@ metadata:
     cert-manager.io/cluster-issuer: {{ .Values.certificateIssuer }}
     nginx.ingress.kubernetes.io/backend-protocol: http
     nginx.ingress.kubernetes.io/proxy-body-size: {{ .Values.bodySize }}
+    nginx.ingress.kubernetes.io/proxy-read-timeout: {{ .Values.readTimeout | quote }}
   name: {{ .Values.serviceName }}
 spec:
   ingressClassName: nginx
@@ -16,7 +17,7 @@ spec:
           service:
             name: {{ .Values.serviceName }}
             port:
-              name: http
+              number: {{ .Values.originServer.port }}
         path: /
         pathType: Prefix
   tls:

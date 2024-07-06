@@ -6,4 +6,5 @@ originServer:
   port: 8080
   address: my-internal-service.lan
 bodySize: 100m
+readTimeout: 1800
 ...

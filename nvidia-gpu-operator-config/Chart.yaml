@@ -1,0 +1,6 @@
+apiVersion: v2
+name: nvidia-gpu-operator-config
+description: A chart to deploy nvidia-gpu-operator-config
+type: application
+version: 0.0.1
+appVersion: "0.0.1"

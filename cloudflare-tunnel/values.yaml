@@ -49,7 +49,18 @@ livenessProbe:
   httpGet:
     path: /ready
     port: 2000
-readinessProbe: {}
+  failureThreshold: 1
+  initialDelaySeconds: 10
+  periodSeconds: 10
+
+readinessProbe:
+  httpGet:
+    path: /ready
+    port: 2000
+  failureThreshold: 1
+  initialDelaySeconds: 10
+  periodSeconds: 10
+
 #  httpGet:
 #    path: /
 #    port: http

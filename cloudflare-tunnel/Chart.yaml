@@ -1,0 +1,6 @@
+apiVersion: v2
+name: cloudflare-tunnel
+description: A Helm chart to deploy Cloudflare tunnel on Kubernetes
+type: application
+version: 0.0.1
+appVersion: "2024.11.1"

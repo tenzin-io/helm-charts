@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version of local-path-provisioner to publish'
+        description: "Version of local-path-provisioner to publish"
         required: true
-        default: 'v0.0.26'
+        default: "v0.0.31"
 
 jobs:
   build:
